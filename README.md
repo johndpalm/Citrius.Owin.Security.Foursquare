@@ -1,7 +1,9 @@
 # Citrius.Owin.Security.Foursquare
 Citrius.Owin.Security.Foursquare is a [OWIN](http://owin.org/) [Katana](http://katanaproject.codeplex.com) authentication provider for [Foursquare](https://developer.foursquare.com).
 
-## NuGet Package Available
+## Installation via NuGet Package
+
+Create an app and get your unique Client ID and Client Secret from: [https://developer.foursquare.com](https://developer.foursquare.com)
 
 	Install-Package Citrius.Owin.Security.Foursquare -Pre
 
@@ -10,8 +12,6 @@ Citrius.Owin.Security.Foursquare is a [OWIN](http://owin.org/) [Katana](http://k
             app.UseFoursquareAuthentication(
                 clientId: "",
                 clientSecret: "");
-
-Create an app and get your unique Client ID and Client Secret from: [https://developer.foursquare.com](https://developer.foursquare.com)
 
 ## License
 [Apache v2 License](https://github.com/johndpalm/Citrius.Owin.Security.Foursquare/blob/master/LICENSE.txt)
