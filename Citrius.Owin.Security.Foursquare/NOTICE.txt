@@ -1,0 +1,10 @@
+Citrius.Owin.Security.Foursquare (https://github.com/johndpalm/Citrius.Owin.Security.Foursquare)
+Copyright (c) 2013 Citrius Corporation, All rights reserved.
+
+
+This product includes software developed at:
+
+Microsoft Open Technologies, Inc.
+Katana Project (http://katanaproject.codeplex.com/)
+Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
+
