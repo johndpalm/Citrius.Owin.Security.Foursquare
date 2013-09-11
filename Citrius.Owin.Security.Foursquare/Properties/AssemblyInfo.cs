@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Citrius.Owin.Security.Foursquare")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Owin authentication handler for Foursquare")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Citrius Corporation")]
 [assembly: AssemblyProduct("Citrius.Owin.Security.Foursquare")]
