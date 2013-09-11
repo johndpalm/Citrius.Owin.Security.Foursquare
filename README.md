@@ -11,8 +11,7 @@ Citrius.Owin.Security.Foursquare is a [OWIN](http://owin.org/) [Katana](http://k
                 clientId: "",
                 clientSecret: "");
 
-    Create an app and get your unique Client ID and Client Secret from:
-    	[https://developer.foursquare.com](https://developer.foursquare.com)
+Create an app and get your unique Client ID and Client Secret from: [https://developer.foursquare.com](https://developer.foursquare.com)
 
 ## License
 [Apache v2 License](https://github.com/johndpalm/Citrius.Owin.Security.Foursquare/blob/master/LICENSE.txt)
