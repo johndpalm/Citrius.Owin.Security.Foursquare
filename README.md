@@ -5,7 +5,7 @@ Citrius.Owin.Security.Foursquare is a [OWIN](http://owin.org/) [Katana](http://k
 
 Create a Foursquare app to get your unique Client ID and Client Secret from: [https://developer.foursquare.com](https://developer.foursquare.com)
 
-	Install-Package Citrius.Owin.Security.Foursquare -Pre
+	Install-Package Citrius.Owin.Security.Foursquare
 
 	Add the following to Startup.Auth.cs (VS2013) or AuthConfig.cs (VS2012):
 
