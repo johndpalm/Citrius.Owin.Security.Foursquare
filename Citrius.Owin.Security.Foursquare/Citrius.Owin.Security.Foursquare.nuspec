@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>2.0.0</version>
+    <title>$title$</title>
+    <authors>John Palmer, $author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/johndpalm/Citrius.Owin.Security.Foursquare/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/johndpalm/Citrius.Owin.Security.Foursquare</projectUrl>
+    <iconUrl>https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_36x36.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2013 Citrius Corporation. All rights reserved.</copyright>
+    <tags>OWIN Security Authentication Foursquare</tags>
+  </metadata>
+</package>
