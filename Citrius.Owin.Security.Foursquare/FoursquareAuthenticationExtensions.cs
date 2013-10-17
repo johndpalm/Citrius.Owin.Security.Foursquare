@@ -31,8 +31,7 @@ namespace Owin
                 new FoursquareAuthenticationOptions
                 {
                     ClientId = clientId,
-                    ClientSecret = clientSecret,
-                    SignInAsAuthenticationType = app.GetDefaultSignInAsAuthenticationType(),
+                    ClientSecret = clientSecret
                 });
         }
     }

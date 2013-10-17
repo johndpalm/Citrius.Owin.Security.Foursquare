@@ -3,6 +3,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Provider;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace Citrius.Owin.Security.Foursquare
@@ -12,9 +13,19 @@ namespace Citrius.Owin.Security.Foursquare
         public FoursquareAuthenticatedContext(IOwinContext context, JObject user, string accessToken)
             : base(context)
         {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
             
             User = user;
             AccessToken = accessToken;
+
+            JToken userId = User["id"];
+            if (userId == null)
+            {
+                throw new ArgumentException("The user does not have an id.", "user");
+            }
 
             Id = TryGetValue(user, "id");
             FirstName = TryGetValue(user, "firstName");

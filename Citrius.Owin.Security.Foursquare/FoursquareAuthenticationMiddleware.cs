@@ -23,6 +23,15 @@ namespace Citrius.Owin.Security.Foursquare
             FoursquareAuthenticationOptions options)
             : base(next, options)
         {
+            if (string.IsNullOrWhiteSpace(Options.ClientId))
+            {
+                throw new ArgumentException("The 'ClientId' must be provided.");
+            }
+            if (string.IsNullOrWhiteSpace(Options.ClientSecret))
+            {
+                throw new ArgumentException("The 'ClientSecret' option must be provided.");
+            }
+
             _logger = app.CreateLogger<FoursquareAuthenticationMiddleware>();
 
             if (Options.Provider == null)
@@ -32,10 +41,15 @@ namespace Citrius.Owin.Security.Foursquare
 
             if (Options.StateDataFormat == null)
             {
-                var dataProtector = app.CreateDataProtector(
+                IDataProtector dataProtector = app.CreateDataProtector(
                     typeof(FoursquareAuthenticationMiddleware).FullName,
                     Options.AuthenticationType, "v1");
                 Options.StateDataFormat = new PropertiesDataFormat(dataProtector);
+            }
+
+            if (String.IsNullOrEmpty(Options.SignInAsAuthenticationType))
+            {
+                Options.SignInAsAuthenticationType = app.GetDefaultSignInAsAuthenticationType();
             }
 
             _httpClient = new HttpClient(ResolveHttpMessageHandler(Options));
