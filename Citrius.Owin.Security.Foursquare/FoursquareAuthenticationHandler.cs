@@ -29,8 +29,7 @@ namespace Citrius.Owin.Security.Foursquare
         }
         public override async Task<bool> InvokeAsync()
         {
-            if (Options.ReturnEndpointPath != null &&
-                String.Equals(Options.ReturnEndpointPath, Request.Path, StringComparison.OrdinalIgnoreCase))
+            if (!String.IsNullOrEmpty(Options.CallbackPath) && Options.CallbackPath == Request.Path.ToString())
             {
                 return await InvokeReturnPathAsync();
             }
@@ -141,22 +140,20 @@ namespace Citrius.Owin.Security.Foursquare
                 return Task.FromResult<object>(null);
             }
 
-            var challenge = Helper.LookupChallenge(Options.AuthenticationType, Options.AuthenticationMode);
+            AuthenticationResponseChallenge challenge = Helper.LookupChallenge(Options.AuthenticationType, Options.AuthenticationMode);
 
             if (challenge != null)
             {
-                string requestPrefix = Request.Scheme + "://" + Request.Host;
-                string currentQueryString = Request.QueryString;
-                string currentUri = string.IsNullOrEmpty(currentQueryString)
-                    ? requestPrefix + Request.PathBase + Request.Path
-                    : requestPrefix + Request.PathBase + Request.Path + "?" + currentQueryString;
+                string baseUri = Request.Scheme + Uri.SchemeDelimiter + Request.Host + Request.PathBase;
 
-                string redirectUri = requestPrefix + Request.PathBase + Options.ReturnEndpointPath;
+                string currentUri = baseUri + Request.Path + Request.QueryString;
 
-                var extra = challenge.Properties;
-                if (string.IsNullOrEmpty(extra.RedirectUrl))
+                string redirectUri = baseUri + Options.CallbackPath;
+
+                AuthenticationProperties extra = challenge.Properties;
+                if (string.IsNullOrEmpty(extra.RedirectUri))
                 {
-                    extra.RedirectUrl = currentUri;
+                    extra.RedirectUri = currentUri;
                 }
 
                 // OAuth2 10.12 CSRF
@@ -187,10 +184,10 @@ namespace Citrius.Owin.Security.Foursquare
 
             var model = await AuthenticateAsync();
 
-            var context = new FoursquareReturnEndpointContext(Context, model, ErrorDetails);
+            var context = new FoursquareReturnEndpointContext(Context, model);
             context.SignInAsAuthenticationType = Options.SignInAsAuthenticationType;
-            context.RedirectUri = model.Properties.RedirectUrl;
-            model.Properties.RedirectUrl = null;
+            context.RedirectUri = model.Properties.RedirectUri;
+            model.Properties.RedirectUri = null;
 
             await Options.Provider.ReturnEndpoint(context);
 
@@ -206,6 +203,11 @@ namespace Citrius.Owin.Security.Foursquare
 
             if (!context.IsRequestCompleted && context.RedirectUri != null)
             {
+                if (context.Identity == null)
+                {
+                    // add a redirect hint that sign-in failed in some way
+                    context.RedirectUri = WebUtilities.AddQueryString(context.RedirectUri, "error", "access_denied");
+                }
                 Response.Redirect(context.RedirectUri);
                 context.RequestCompleted();
             }
@@ -217,7 +219,7 @@ namespace Citrius.Owin.Security.Foursquare
         {
             string requestPrefix = Request.Scheme + "://" + Request.Host;
 
-            string redirectUri = requestPrefix + RequestPathBase + Options.ReturnEndpointPath; // + "?state=" + Uri.EscapeDataString(Options.StateDataFormat.Protect(state));            
+            string redirectUri = requestPrefix + RequestPathBase + Options.CallbackPath; // + "?state=" + Uri.EscapeDataString(Options.StateDataFormat.Protect(state));            
             return redirectUri;
         }
     }

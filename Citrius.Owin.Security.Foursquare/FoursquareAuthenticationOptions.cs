@@ -15,7 +15,7 @@ namespace Citrius.Owin.Security.Foursquare
             : base(Scheme)
         {
             Caption = Scheme;
-            ReturnEndpointPath = "/signin-foursquare";
+            CallbackPath = "/signin-foursquare";
             AuthenticationMode = AuthenticationMode.Passive;
             BackchannelTimeout = TimeSpan.FromSeconds(60);
             Scope = new List<string>();
@@ -35,7 +35,7 @@ namespace Citrius.Owin.Security.Foursquare
             set { Description.Caption = value; }
         }
 
-        public string ReturnEndpointPath { get; set; }
+        public string CallbackPath { get; set; }
 
         public string SignInAsAuthenticationType { get; set; }
 
