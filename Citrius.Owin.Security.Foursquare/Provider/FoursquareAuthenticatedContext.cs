@@ -37,15 +37,15 @@ namespace Citrius.Owin.Security.Foursquare
             HomeCity = TryGetValue(user, "homeCity");
             Bio = TryGetValue(user, "bio");
             Contact = TryGetValue(user, "contact");
-            Phone = TryGetValue(JObject.Parse(Contact), "phone");
-            Email = TryGetValue(JObject.Parse(Contact), "email");
-            Twitter = TryGetValue(JObject.Parse(Contact), "twitter");
-            Facebook = TryGetValue(JObject.Parse(Contact), "facebook");
-            Badges = TryGetValue(user, "badges");
-            Mayorships = TryGetValue(user, "mayorships");
-            Checkins = TryGetValue(user, "checkins");
-            Photos = TryGetValue(user, "photos");
-            Scores = TryGetValue(user, "scores");
+            //Phone = TryGetValue(JObject.Parse(Contact), "phone");
+            //Email = TryGetValue(JObject.Parse(Contact), "email");
+            //Twitter = TryGetValue(JObject.Parse(Contact), "twitter");
+            //Facebook = TryGetValue(JObject.Parse(Contact), "facebook");
+            //Badges = TryGetValue(user, "badges");
+            //Mayorships = TryGetValue(user, "mayorships");
+            //Checkins = TryGetValue(user, "checkins");
+            //Photos = TryGetValue(user, "photos");
+            //Scores = TryGetValue(user, "scores");
             Link = "https://foursquare.com/user/" + Id;
         }
 
